@@ -21,6 +21,10 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "apiKey": "f6d7dcefc40fffc8cf54607ec0ab8a78",
+      "baseUrl": "https://api.openweathermap.org/data/2.5/weather?"
     }
   }
 }
