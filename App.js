@@ -32,7 +32,7 @@ export default function App() {
       console.log(error)  
     }
   }
-  
+
   if (weather) {
     const {
       main: { temp },
