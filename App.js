@@ -4,6 +4,8 @@ import { StatusBar } from 'expo-status-bar';
 import * as Location from 'expo-location';
 import WeatherInfo from './components/WeatherInfo';
 import UnitsPicker from './components/UnitsPicker';
+import { colors } from './utils';
+import ReloadIcon from './components/ReloadIcon';
 
 export default function App() {
   const [error, setError] = useState(null)
@@ -46,6 +48,7 @@ export default function App() {
         <StatusBar style="auto" />
         <View style={styles.main}>
           <UnitsPicker  unitSystem={unitSystem} setUnitSystem={setUnitSystem}/>
+          <ReloadIcon />
           <WeatherInfo weather={weather}/>
         </View>
       </View>
@@ -61,7 +64,7 @@ export default function App() {
   else {
     return (
       <View style={styles.container}>
-        <ActivityIndicator />
+        <ActivityIndicator size='large' color={colors.PRIMARY_COLOR} />
         <StatusBar style='auto' />
       </View>
     );
@@ -72,6 +75,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent:'center'
   },
   main: {
     flex:1,
