@@ -11,35 +11,32 @@ export default function App() {
   const [unitSystem, setUnitSystem] = useState('metric')
 
   useEffect(() => {
+    async function load() {
+      try {
+        let { status } = await Location.requestPermissionsAsync();
+        if (status !== "granted") {
+          setError("Application need you location please");
+          return;
+        }
+        const location = await Location.getCurrentPositionAsync();
+        const { latitude, longitude } = location.coords;
+
+        const weather = `${Expo.Constants.manifest.extra.baseUrl}lat=${latitude}&lon=${longitude}&units=${unitSystem}&appid=${Expo.Constants.manifest.extra.apiKey}`;
+        const res = await fetch(weather);
+        const result = await res.json();
+
+        if (res.ok) {
+          setWeather(result);
+        } else {
+          setError(result.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
     load()
   }
   ,[unitSystem])
-
-  async function load(){
-    try {
-      let { status } = await Location.requestPermissionsAsync()
-      if(status !== 'granted') {
-        setError('Application need you location please')
-        return;
-      }
-      const location = await Location.getCurrentPositionAsync()
-      const { latitude , longitude } = location.coords
-
-      const weather=`${Expo.Constants.manifest.extra.baseUrl}lat=${latitude}&lon=${longitude}&units=${unitSystem}&appid=${Expo.Constants.manifest.extra.apiKey}`
-      const res = await fetch(weather)
-      const result = await res.json()
-
-      if(res.ok) {
-        setWeather(result);
-      }
-      else {
-        setError(result.message)
-      }
-    } 
-    catch (error) {
-      console.log(error)  
-    }
-  }
 
   if (weather) {
     return (
