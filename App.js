@@ -1,10 +1,13 @@
 import React, {useEffect,useState} from 'react';
 import { StyleSheet, View , Text} from 'react-native';
 import * as Location from 'expo-location';
+import { StatusBar } from 'expo-status-bar';
+import WeatherInfo from './components/WeatherInfo';
 
 export default function App() {
   const [error, setError] = useState(null)
   const [weather, setWeather] = useState(null)
+  const [unitSystem, setUnitSystem] = useState('metric')
 
   useEffect(() => {
     load()
@@ -20,7 +23,7 @@ export default function App() {
       const location = await Location.getCurrentPositionAsync()
       const { latitude , longitude } = location.coords
 
-      const weather=`${Expo.Constants.manifest.extra.baseUrl}lat=${latitude}&lon=${longitude}&appid=${Expo.Constants.manifest.extra.apiKey}`
+      const weather=`${Expo.Constants.manifest.extra.baseUrl}lat=${latitude}&lon=${longitude}&units=${unitSystem}&appid=${Expo.Constants.manifest.extra.apiKey}`
       const res = await fetch(weather)
       const result = await res.json()
 
@@ -37,12 +40,12 @@ export default function App() {
   }
 
   if (weather) {
-    const {
-      main: { temp },
-    } = weather;
     return (
       <View style={styles.container}>
-        <Text>{temp}</Text>
+        <StatusBar style="auto" />
+        <View style={styles.main}>
+          <WeatherInfo weather={weather}/>
+        </View>
       </View>
     );
   }
@@ -60,4 +63,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  main: {
+    flex:1,
+    justifyContent:'center'
+  }
 });
