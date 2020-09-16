@@ -5,7 +5,10 @@ import * as Location from 'expo-location';
 export default function App() {
   const [error, setError] = useState(null)
   const [weather, setWeather] = useState(null)
-  useEffect(() => load(), [])
+
+  useEffect(() => {
+    load()
+  }, [])
 
   async function load(){
     try {
