@@ -6,6 +6,7 @@ import WeatherInfo from './components/WeatherInfo';
 import UnitsPicker from './components/UnitsPicker';
 import { colors } from './utils';
 import ReloadIcon from './components/ReloadIcon';
+import WeatherDetails from './components/WeatherDetails';
 
 export default function App() {
   const [error, setError] = useState(null)
@@ -41,16 +42,17 @@ export default function App() {
       console.log(error);
     }
   }
-  
+
   if (weather) {
     return (
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
-          <UnitsPicker  unitSystem={unitSystem} setUnitSystem={setUnitSystem}/>
+          <UnitsPicker unitSystem={unitSystem} setUnitSystem={setUnitSystem} />
           <ReloadIcon load={load} />
-          <WeatherInfo weather={weather}/>
+          <WeatherInfo weather={weather} />
         </View>
+        <WeatherDetails weather={weather} />
       </View>
     );
   }
