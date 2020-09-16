@@ -3,6 +3,7 @@ import { StyleSheet, View , Text} from 'react-native';
 import * as Location from 'expo-location';
 import { StatusBar } from 'expo-status-bar';
 import WeatherInfo from './components/WeatherInfo';
+import UnitsPicker from './components/UnitsPicker';
 
 export default function App() {
   const [error, setError] = useState(null)
@@ -11,7 +12,8 @@ export default function App() {
 
   useEffect(() => {
     load()
-  }, [])
+  }
+  ,[unitSystem])
 
   async function load(){
     try {
@@ -44,6 +46,7 @@ export default function App() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <View style={styles.main}>
+          <UnitsPicker  unitSystem={unitSystem} setUnitSystem={setUnitSystem}/>
           <WeatherInfo weather={weather}/>
         </View>
       </View>
