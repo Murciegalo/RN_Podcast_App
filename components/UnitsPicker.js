@@ -1,6 +1,6 @@
 import React from 'react'
 import { View , StyleSheet, Platform } from 'react-native'
-import {Picker} from '@react-native-community/picker'
+import {Picker} from 'react-native'
 
 export default function UnitsPicker({ unitSystem, setUnitSystem }) {
   return (
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
         top: -20
       },
       android:{
-        top: 20
+        top: 30
       }
     }),
     left:20,
