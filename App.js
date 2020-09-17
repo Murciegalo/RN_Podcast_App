@@ -52,7 +52,7 @@ export default function App() {
           <ReloadIcon load={load} />
           <WeatherInfo weather={weather} />
         </View>
-        <WeatherDetails weather={weather} />
+        <WeatherDetails weather={weather} unitSystem={unitSystem} />
       </View>
     );
   }
