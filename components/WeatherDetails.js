@@ -6,6 +6,7 @@ import {FontAwesome5, MaterialCommunityIcons} from '@expo/vector-icons'
 export default function WeatherDetails({weather}) {
   const {
     main: {feels_like , humidity},
+    wind: {speed}
   } = weather
   return (
     <View style={styles.main}>
@@ -24,8 +25,8 @@ export default function WeatherDetails({weather}) {
               color={colors.PRIMARY_COLOR}
             />
             <View>
-              <Text style={styles.text}>Feels like:</Text>
-              <Text> {feels_like}°</Text>
+              <Text>Feels like:</Text>
+              <Text style={styles.text}> {feels_like}°</Text>
             </View>
           </View>
         </View>
@@ -38,7 +39,7 @@ export default function WeatherDetails({weather}) {
             />
             <View>
               <Text>Humidity:</Text>
-              <Text> {humidity}°</Text>
+              <Text style={styles.text}> {humidity}°</Text>
             </View>
           </View>
         </View>
@@ -65,6 +66,7 @@ const styles = StyleSheet.create({
     padding:20
   },
   text:{
-
+    color: colors.SECONDARY_COLOR,
+    fontWeight: 'bold'
   }
 })
